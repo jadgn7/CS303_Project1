@@ -1,6 +1,6 @@
 #ifndef POLYNOMIAL_ITERATOR_H
 #define POLYNOMIAL_ITERATOR_H
-class iterator{
+class piterator{
 	//Parent Class Access
 	friend class Polynomial<ItemType>;
 
@@ -11,19 +11,32 @@ private:
 	typename Polynomial<ItemType>::Term* current;
 
 	//iterator constructor
-	iterator(Polynomial<ItemType>* itParent, Term* position) :
+	piterator(Polynomial<ItemType>* itParent, Term* position) :
 		parent(itParent), current(position) {}
 
 public:
+	//operator~returns coefficient of selected term if valid
+	ItemType getCo() const {
+		if (current == NULL)
+			throw std::invalid_argument("Cannot dereference end()");
+		return current->coefficient;
+	}
 
-	//operator~returns reference to selected Term if valid
+	//operator~enforce reference to coefficient of selected Term if valid
+	ItemType getCoRef(){
+		if (current == NULL)
+			throw std::invalid_argument("Cannot dereference end()");
+		return &(current->coefficient)
+	}
+
+	//operator~returns exponent of selected Term if valid
 	ItemType& operator*() const {
 		if (current == NULL)
 			throw std::invalid_argument("Cannot dereference end()");
 		return current->exponent;
 	}
 
-	//operator~enforce pointer to selected Term if valid
+	//operator~enforce reference to exponent of selected Term if valid
 	ItemType& operator->(){
 		if (current == NULL)
 			throw std::invalid_argument("Cannot dereference end()");
@@ -31,42 +44,45 @@ public:
 	}
 
 	//operator~advance iterator
-	iterator& operator++(){
-		if (current == parent->leadingTerm)
+	piterator& operator++(){
+		if (current == NULL)
 			throw std::invalid_argument("Cannot advance past end()");
 		current = current->next;
 		return *this;
 	}
 
 	//operator~retreat iterator
-	iterator& operator--(){
-		if (current == parent->lowestTerm)
+	piterator& operator--(){
+		if (current == parent->leadingTerm)
 			throw std::invalid_argument("Cannot retreat before begin()");
-		current = current->prev;
+		if (current==NULL)
+			current = parent->lowestTerm;
+		else
+			current = current->prev;
 		return *this;
 	}
 	//operator~return value prior to advance
-	iterator operator++(int){
-		iterator originalValue =*this;
+	piterator operator++(int){
+		piterator originalValue =*this;
 		++(*this);
 		return originalValue;
 	}
 	//operator~return value prior to retreat
-	iterator operator--(int){
-		iterator originalValue = *this;
+	piterator operator--(int){
+		piterator originalValue = *this;
 		--(*this);
 		return originalValue;
 	}
 
 	//operator~equality operator
-	bool operator ==(const iterator& other){
+	bool operator ==(const piterator& other){
 		return current == other.current;
 	}
 	//operator~!=inequality operator
-	bool operator !=(const iterator& other){
+	bool operator !=(const piterator& other){
 		return current != other.current;
 	}
 
-	};
+	};//end of iterator class
 
 #endif
