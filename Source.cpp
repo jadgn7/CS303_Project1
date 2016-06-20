@@ -22,7 +22,7 @@ void printOrderedPoly(const OrderedPoly<int>& f){
 		if ((f.getLeadDegree() != *iter)&& (iter.getCo()>0))
 			cout << "+";
 		if (*iter == 0) {
-			cout << "1";
+			cout << iter.getCo();
 			++iter;
 		}
 		else {
@@ -33,8 +33,9 @@ void printOrderedPoly(const OrderedPoly<int>& f){
 			if ((*iter != 1)) {
 				cout << "^" << *iter;
 			}
-			}
 			++iter;
+			}
+			
 	}
 	cout << endl << endl;
 }
@@ -43,18 +44,13 @@ void main(void){
 
 	cout<<"Things are okay"<<endl<<endl;
 	//test normal list functions
-
 	cout<<endl<<"Ordered"<<endl<<endl;
 	//OrderedPoly test
 	OrderedPoly<int> o;
-	o.insert(2,3);
-	o.insert(3,2);
-	o.insert(4,1);
-	o.insert(1,7);
-	o.insert(0, 4);
-	o.insert(4, 0);
-	o.insert(5, 3);
-	o.insert(-5, 5);
-	o.insert(5, -5);
+	o.insert(5, 0);
+	o.insert(1,1);
+	o.insert(22, 0);
+	o.insert(1, 7);
+	o.insert(20, 1);
 	printOrderedPoly(o);
 }
