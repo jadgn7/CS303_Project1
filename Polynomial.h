@@ -180,8 +180,10 @@ public://==========================================================
 			 ItemType newCoefficient = position.current->coefficient+coefficientIN;
 			 Term* doomed =position.current;
 			 Term* newCurrent = new Term(newCoefficient, exponentIN,position.current->prev, position.current->next);
-			 doomed->next->prev = newCurrent;
-			 doomed->prev->next = newCurrent;
+			 if (doomed->next!=NULL)
+				doomed->next->prev = newCurrent;
+			 if (doomed->prev!=NULL)
+				doomed->prev->next = newCurrent;
 			 delete doomed;
 		}
 		else{
