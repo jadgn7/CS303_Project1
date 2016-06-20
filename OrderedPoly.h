@@ -12,12 +12,12 @@ private:
 	Polynomial <ItemType> Poly;
 
 public:
-
 	typedef typename Polynomial<ItemType>::const_piterator const_piterator;
-
 	//*ordering functions*//
 	//function~find position based on exponent value, then insert
 	void insert(const ItemType& coefficientIN, const ItemType& exponentIN){
+		if (coefficientIN == 0)
+			return;
 		typename Polynomial<ItemType>::piterator itr = Poly.begin();
 		while ((itr!=Poly.end()) && (*itr > exponentIN)){
 			++itr;
@@ -36,14 +36,10 @@ public:
 	const_piterator end() const{
 		return Poly.end();
 	}
-
-
-
-
-
-
-
-
+	//function~return lead degree
+	const ItemType& getLeadDegree() const{
+		return Poly.getLeadDegree();
+	}
 
 };//end of OrderedPoly class
 #endif
