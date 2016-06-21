@@ -3,7 +3,6 @@ template <typename ItemType>
 
 class Polynomial{
 private://================================================================================================
-<<<<<<< HEAD
 			struct Term{
 			//term components
 			ItemType coefficient;
@@ -18,22 +17,6 @@ private://======================================================================
 				Term* prevValue = NULL, Term* nextValue =NULL) :
 				coefficient(givenCoefficient), exponent(givenExponent), prev(prevValue), next(nextValue){}
 		};//end of term struct
-=======
-        struct Term{
-            //term components
-            ItemType coefficient;
-            ItemType exponent;
-            //Pointer to next term
-            Term* next;
-            //Pointer to previous term
-            Term* prev;
-
-            //Term Constructor
-            Term (const ItemType& givenCoefficient, const ItemType& givenExponent,
-                Term* prevValue = NULL, Term* nextValue =NULL) :
-                coefficient(givenCoefficient), exponent(givenExponent), prev(prevValue), next(nextValue){}
-		};
->>>>>>> brendanDevBranch
 
 		//reference to head
 		Term* leadingTerm;
@@ -50,13 +33,13 @@ private://======================================================================
 				return (exponent<other.exponent);
 		}*/
 public://==========================================================
-
+	
 #include "const_Polynomial_It.h"
 	friend class piterator;
 #include "Polynomial_It.h"
 	friend class const_piterator;
 
-	//Polynomial constructor
+	//Polynomial constructor 
 	Polynomial() : leadingTerm(NULL),lowestTerm(NULL),numTerms(0){}
 
 
@@ -79,7 +62,7 @@ public://==========================================================
 	}
 
 //*Polynomial functions*//------------------------------------------------------
-
+	
 	//operator~Polynomial overwrite--not yet working
 	/*
 	Polynomial<ItemType>& operator=(const Polynomial<ItemType>& other){
@@ -90,6 +73,7 @@ public://==========================================================
 
 	//function~push new Term to front of polynomial
 	void push_front(const ItemType& coefficientIN, const ItemType& exponentIN){
+
 		//if matching exponents, replace leading term with new term combining coefficients
 		if((leadingTerm!=NULL) && (leadingTerm->exponent==exponentIN)){
 			ItemType newCoefficient = (leadingTerm->coefficient)+coefficientIN;
@@ -130,17 +114,12 @@ public://==========================================================
 			else //Polynomial was empty, 
 				push_front(coefficientIN, exponentIN);
 		}
-<<<<<<< HEAD
-=======
-		else //Polynomial was empty,
-			push_front(coefficientIN, exponentIN);
->>>>>>> brendanDevBranch
 	}
 	//function~remove leading Term of Polynomial
 	void pop_front(){
 		if (leadingTerm==NULL)//prevent attempt to pop empty list
 			throw std::invalid_argument("Cannot Pop from empty list!");
-		Term* removedTerm = leadingTerm;//save pointer to leading term
+		Term* removedTerm = leadingTerm;//save pointer to leading term 
 		leadingTerm = leadingTerm->next;//2nd highest term is new leading term
 		delete removedTerm; //delete previous leading term
 		if (leadingTerm != NULL)//if polynomial is not empty, make sure leading term has none before it
