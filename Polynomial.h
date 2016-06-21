@@ -3,7 +3,6 @@ template <typename ItemType>
 
 class Polynomial{
 private://================================================================================================
-<<<<<<< HEAD
 			struct Term{
 			//term components
 			ItemType coefficient;
@@ -18,22 +17,6 @@ private://======================================================================
 				Term* prevValue = NULL, Term* nextValue =NULL) :
 				coefficient(givenCoefficient), exponent(givenExponent), prev(prevValue), next(nextValue){}
 		};//end of term struct
-=======
-        struct Term{
-            //term components
-            ItemType coefficient;
-            ItemType exponent;
-            //Pointer to next term
-            Term* next;
-            //Pointer to previous term
-            Term* prev;
-
-            //Term Constructor
-            Term (const ItemType& givenCoefficient, const ItemType& givenExponent,
-                Term* prevValue = NULL, Term* nextValue =NULL) :
-                coefficient(givenCoefficient), exponent(givenExponent), prev(prevValue), next(nextValue){}
-		};
->>>>>>> brendanDevBranch
 
 		//reference to head
 		Term* leadingTerm;
@@ -130,11 +113,6 @@ public://==========================================================
 			else //Polynomial was empty, 
 				push_front(coefficientIN, exponentIN);
 		}
-<<<<<<< HEAD
-=======
-		else //Polynomial was empty,
-			push_front(coefficientIN, exponentIN);
->>>>>>> brendanDevBranch
 	}
 	//function~remove leading Term of Polynomial
 	void pop_front(){
