@@ -19,7 +19,7 @@ public:
 		if (coefficientIN == 0)
 			return;
 		typename Polynomial<ItemType>::piterator itr = Poly.begin();
-		while ((itr!=Poly.end()) && (*itr > exponentIN)){
+		while ((itr != Poly.end()) && (*itr > exponentIN)) {
 			++itr;
 		}
 		Poly.insert(itr, coefficientIN, exponentIN);
