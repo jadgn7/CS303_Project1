@@ -1,6 +1,7 @@
 #include "String_Tokenizer.h"
 using std::string;
 
+// function for setting the indicies of next token
 void String_Tokenizer::find_next() {
     //get the index of the first non delimiter
     start = source.find_first_not_of(delim, end);
@@ -9,10 +10,12 @@ void String_Tokenizer::find_next() {
     end = source.find_first_of(delim, start);
 }
 
+// returns if it had reached end of string
 bool String_Tokenizer::has_next() {
     return start != string::npos;
 }
 
+// function that returns the next token in string
 string String_Tokenizer::next_token() {
     if(!has_next()) {
         return "";
